@@ -1,9 +1,9 @@
-<div *ngIf="!hero">
+<div *ngIf="!heroService.selectedHero">
     <h1>{{title}}</h1>
 </div>
-<div *ngIf="hero">
+<div *ngIf="heroService.selectedHero">
 
-    <h1 class="heroname">{{hero.name}}</h1>
+    <h1 class="heroname">{{heroService.selectedHero.name}}</h1>
 
 
 </div>
