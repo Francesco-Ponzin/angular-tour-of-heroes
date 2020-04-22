@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { MessageService } from '../message.service';
+
 
 @Component({
   selector: 'app-heroes',
@@ -14,9 +16,13 @@ export class HeroesComponent implements OnInit {
 
   onSelect(hero: Hero): void {
     if (this.heroService.selectedHero === hero) {
+      this.messageService.add(hero.name + " de-selected");
+
       this.deSelect();
     } else {
       this.heroService.selectedHero = hero;
+      this.messageService.add(hero.name + " selected");
+
 
     }
   }
@@ -26,15 +32,15 @@ export class HeroesComponent implements OnInit {
   }
 
 
-  constructor(public heroService: HeroService) { }
+  constructor(public heroService: HeroService, public messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
+    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+  
   }
 
 }
